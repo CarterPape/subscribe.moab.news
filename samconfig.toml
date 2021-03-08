@@ -1,0 +1,11 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "subscribe-moab-news"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-tgyurhvufa67"
+s3_prefix = "subscribe-moab-news"
+region = "us-west-2"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+image_repositories = ["HelloWorldFunction=043731005742.dkr.ecr.us-west-2.amazonaws.com/subscribe.moab.news", "HolaWorldFunction=043731005742.dkr.ecr.us-west-2.amazonaws.com/subscribe.moab.news"]

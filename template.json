@@ -1,0 +1,80 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Transform": "AWS::Serverless-2016-10-31",
+    "Description": "python3.8\nSample SAM Template for subscribe.moab.news",
+    "Globals": {
+        "Function": {
+            "Timeout": 3
+        }
+    },
+    "Resources": {
+        "HelloWorldFunction": {
+            "Type": "AWS::Serverless::Function",
+            "Properties": {
+                "Events": {
+                    "HelloWorld": {
+                        "Type": "Api",
+                        "Properties": {
+                            "Path": "/hello",
+                            "Method": "get"
+                        }
+                    }
+                },
+                "PackageType": "Image"
+            },
+            "Metadata": {
+                "DockerContext": "./hello_world"
+            }
+        },
+        "HolaWorldFunction": {
+            "Type": "AWS::Serverless::Function",
+            "Properties": {
+                "Events": {
+                    "HolaWorld": {
+                        "Type": "Api",
+                        "Properties": {
+                            "Path": "/hola",
+                            "Method": "get"
+                        }
+                    }
+                },
+                "PackageType": "Image"
+            },
+            "Metadata": {
+                "DockerContext": "./hola_world"
+            }
+        }
+    },
+    "Outputs": {
+        "HelloWorldApi": {
+            "Description": "API Gateway endpoint URL for Prod stage for Hello World function",
+            "Value": {
+                "Fn::Sub": "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
+            }
+        },
+        "HelloWorldFunctionIamRole": {
+            "Description": "Implicit IAM Role created for Hello World function",
+            "Value": {
+                "Fn::GetAtt": ["HelloWorldFunctionRole", "Arn"]
+            }
+        },
+        "HelloWorldFunction": {
+            "Description": "Hello World Lambda Function ARN",
+            "Value": {
+                "Fn::GetAtt": ["HelloWorldFunction", "Arn"]
+            }
+        },
+        "HolaWorldApi": {
+            "Description": "API Gateway endpoint URL for Prod stage for Hola World function",
+            "Value": {
+                "Fn::Sub": "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hola/"
+            }
+        },
+        "HolaWorldFunction": {
+            "Description": "Hola World Lambda Function ARN",
+            "Value": {
+                "Fn::GetAtt": ["HolaWorldFunction", "Arn"]
+            }
+        }
+    }
+}
